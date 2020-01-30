@@ -1,0 +1,42 @@
+<!--pages/select/select.wxml-->
+<!-- 搜索分类 -->
+<view class="container">
+<!--<view class="section">
+   <navigator url="/pages/searchList/searchList" hover-class="navigator-hover">
+    <view class="search" >搜索从这里开始</view>
+    <image src="../img/search.png"/>
+    </navigator>
+  </view>-->
+  <view class="select-list">
+    <view class="select-item">
+      <view class="select-title">菜单</view>
+      <view class="select-iconList one-iconList">
+        <navigator class="select-iconitem" wx:for="{{searchNameArr.searchOne}}" data-id="{{item.id}}"url="/pages/searchList{{item.id}}/searchList{{item.id}}?keywordsId={{item.id}}" hover-class="navigator-hover">{{item.keywords}}</navigator>
+      </view>
+    </view>
+    <view class="select-item">
+      <view class="select-title">肉类</view>
+      <view class="select-iconList two-iconList">
+         <navigator class="select-iconitem" wx:for="{{searchNameArr.searchTwo}}" data-id="{{item.id}}" url="{{item.navigator}}" hover-class="navigator-hover">{{item.keywords}}</navigator>
+      </view>
+   </view>
+   <view class="select-item">
+      <view class="select-title">素菜类</view>
+      <view class="select-iconList three-iconList">
+         <navigator class="select-iconitem" wx:for="{{searchNameArr.searchThree}}" data-id="{{item.id}}" url="{{item.navigator}}" hover-class="navigator-hover">{{item.keywords}}</navigator>
+      </view>
+    </view>
+    <view class="select-item">
+      <view class="select-title">流行学做</view>
+      <view class="select-iconList four-iconList">
+         <navigator class="select-iconitem" wx:for="{{searchNameArr.searchFour}}" data-id="{{item.id}}" url="{{item.navigator}}" hover-class="navigator-hover">{{item.keywords}}</navigator>
+      </view>
+    </view>
+    <view class="select-item">
+      <view class="select-title">烘焙</view>
+      <view class="select-iconList five-iconList">
+         <navigator class="select-iconitem" wx:for="{{searchNameArr.searchFive}}" data-id="{{item.id}}" url="{{item.navigator}}" hover-class="navigator-hover">{{item.keywords}}</navigator>
+      </view>
+    </view>
+  </view>
+</view>

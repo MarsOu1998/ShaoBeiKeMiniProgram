@@ -1,26 +1,69 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
-    "pages/openapi/serverapi/serverapi",
-    "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/im/im",
-    "pages/im/room/room"
+    "pages/logs/logs",
+    "pages/select/select",
+    "pages/user/user",
+    "pages/detailFood/detailFood",
+    "pages/searchList1/searchList1",
+    "pages/searchList2/searchList2",
+    "pages/searchList3/searchList3",
+    "pages/addFood/addFood",
+    "pages/detailFood2/detailFood2",
+    "pages/detailFood3/detailFood3",
+    "pages/detailFood4/detailFood4",
+    "pages/detailFood5/detailFood5",
+    "pages/detailFood6/detailFood6",
+    "pages/detailFood7/detailFood7",
+    "pages/detailFood8/detailFood8",
+    "pages/detailFood9/detailFood9",
+    "pages/detailFood10/detailFood10",
+    "pages/detailFood11/detailFood11",
+    "pages/detailFood12/detailFood12",
+    "pages/detailFood13/detailFood13",
+    "pages/detailFood14/detailFood14",
+    "pages/detailFood15/detailFood15",
+    "pages/detailFood16/detailFood16",
+    "pages/detailFood17/detailFood17",
+    "pages/detailFood18/detailFood18",
+    "pages/detailFood19/detailFood19"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarBackgroundColor": "#F3EBDF",
+    "navigationBarTitleText": "一人食",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "tabBar": {
+    "color": "#ffffff",
+    "selectedColor": "#A37011",
+    "borderStyle": "white",
+    "backgroundColor": "#FFCC66",
+    "list": [
+      {
+        "selectedIconPath": "pages/img/cai02.png",
+        "iconPath": "pages/img/cai01.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "pages/img/guo02.png",
+        "iconPath": "pages/img/guo01.png",
+        "pagePath": "pages/select/select",
+        "text": "分类"
+      },
+      {
+        "selectedIconPath": "pages/img/save02.png",
+        "iconPath": "pages/img/save01.png",
+        "pagePath": "pages/user/user",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
 }
