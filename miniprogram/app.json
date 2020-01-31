@@ -26,7 +26,9 @@
     "pages/detailFood16/detailFood16",
     "pages/detailFood17/detailFood17",
     "pages/detailFood18/detailFood18",
-    "pages/detailFood19/detailFood19"
+    "pages/detailFood19/detailFood19",
+    "pages/login/login",
+    "pages/register/register"
   ],
   "window": {
     "backgroundTextStyle": "light",

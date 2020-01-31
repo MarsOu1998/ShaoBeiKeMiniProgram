@@ -1,0 +1,43 @@
+.profile{
+  display: flex;
+  justify-content: center;
+  margin-top: 80rpx;
+}
+.profile image{
+  border-radius: 50%;
+   width: 290rpx;
+  height: 240rpx;
+}
+.wave{
+  position:fixed; bottom:0;
+}
+.wave image{
+ height: 200rpx;
+}
+.content{
+  margin-top: 40px;
+}
+.account{
+   display: flex;
+   flex-direction: row;
+   padding-left: 20px;
+   padding-top: 20px;
+   padding-bottom: 10px;
+   width: 90%;
+}
+.title{
+   margin-right: 30px;
+   font-weight: bold;
+}
+.hr{
+  border: 1px solid #cccccc;
+  opacity: 0.2;
+  width: 90%;
+  margin: 0 auto;
+  background-color: red;
+}
+.btn{
+  width: 90%;
+  margin-top:20px;
+  color: #999999;
+}
