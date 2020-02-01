@@ -2,22 +2,24 @@
   <view class="profile">
     <image src="/images/profile2.png" ></image>
   </view>
+  <form bindsubmit="register">
   <view class="content" style="margin-top:10rpx;">
   <view class="account">
   <view class="title">账号</view>
-  <view class="num"><input bindinput="inputName" placeholder="请输入账号"  placeholder-style="color:#999999;"/></view>
+  <view class="num"><input name="inputName" placeholder="请输入账号"  placeholder-style="color:#999999;"/></view>
   </view>
   <view class="hr"></view>
   <view class="account">
   <view class="title">密码</view>
   <view class="num">
-  <input bindinput="inputPassword" placeholder="请输入密码" password/></view>
+  <input name="inputPassword" placeholder="请输入密码" password/></view>
   </view>
   <view class="hr"></view>
-  <button class="btn" type="primary" bindtap="login">注册</button> 
+  <button class="btn" type="primary" form-type="submit">注册</button> 
    
 </view>
   <view class="wave">
     <image src="/images/wave.png"></image>
   </view>
+  </form>
 </view>

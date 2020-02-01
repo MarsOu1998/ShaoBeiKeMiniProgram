@@ -2,25 +2,27 @@
   <view class="profile">
     <image src="/images/profile.png" ></image>
   </view>
+  <form bindsubmit="login">
   <view class="content" style="margin-top:10rpx;">
   <view class="account">
   <view class="title">账号</view>
-  <view class="num"><input bindinput="inputName" placeholder="请输入账号"  placeholder-style="color:#999999;"/></view>
+  <view class="num"><input name="inputName" placeholder="请输入账号"  placeholder-style="color:#999999;"/></view>
   </view>
   <view class="hr"></view>
   <view class="account">
   <view class="title">密码</view>
   <view class="num">
-  <input bindinput="inputPassword" placeholder="请输入密码" password/></view>
+  <input name="inputPassword" placeholder="请输入密码" password/></view>
   </view>
   <view class="hr"></view>
   <view style="color:black;margin-top:20rpx;" bindtap="register">
     <text>没有账号？点击这里注册</text>
   </view>
-  <button class="btn" type="primary" bindtap="login">登录</button> 
+  <button class="btn" type="primary" form-type="submit" disabled="{{flase}}">登录</button> 
    
 </view>
   <view class="wave">
     <image src="/images/wave.png"></image>
   </view>
+  </form>
 </view>
