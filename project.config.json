@@ -54,6 +54,14 @@
 					"id": -1,
 					"name": "注册页面",
 					"pathName": "pages/register/register",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/user/user",
+					"query": "",
 					"scene": null
 				}
 			]

@@ -1,4 +1,4 @@
-
+var app=getApp()
 Page({
   data: {
 
@@ -28,12 +28,35 @@ Page({
           wx.cloud.callFunction({
             name:'register',
             data:{
-              account: event.detail.value.inputAccount,
+              account: event.detail.value.inputName,
               password: event.detail.value.inputPassword
             },
             success:function(res){
               console.log(res)
               console.log("注册成功")
+              app.globalData.isLogin=true;
+              wx.cloud.callFunction({
+                name:'searchAccount',
+                data:{
+                  account: event.detail.value.inputName
+                },
+                success:function(res){
+                  app.globalData.userInfo=res.result.data[0];
+                  wx.showToast({
+                    title: '注册成功，即将跳转到首页',
+                    icon: 'none',
+                    duration: 2000,
+                    success: function () {
+                      setTimeout(function () {
+                        wx.switchTab({
+                          url: '/pages/index/index',
+                        })
+                      }, 2000)
+                    }
+                  })
+                }
+              })
+              
             }
           })
         }

@@ -12,9 +12,8 @@ exports.main = async (event, context) => {
       account:event.account,
       password:event.password,
       collection:{}
-    }
-  }).get({
-    success:function(res){
+    },
+    success: function (res) {
       return res
     }
   })

@@ -1,11 +1,13 @@
 <!--pages/user/user.wxml-->
 <view class="container">
 <!-- 用户信息 -->
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+  <view   class="userinfo">
+    <image class="userinfo-avatar" src="/images/profile3.png" background-size="cover"></image>
     <view class="userinfo-text"> 
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <view class="likeCount">我做的菜</view>
+      <view class="userinfo-nickname" wx:if="{{isLogin}}">欢迎，{{userInfo.account}}
+       <view class="likeCount" bindtap="bindViewTap">点击上传我的菜谱</view>
+       </view>
+      <text wx:else bindtap="login">请先登录</text>
     </view> 
   </view>
   <!-- 收藏菜品列表 -->

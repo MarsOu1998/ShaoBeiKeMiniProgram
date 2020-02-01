@@ -1,6 +1,8 @@
 // pages/user/user.js
 //获取应用实例
 var app = getApp()
+var isLogin=false;
+var userInfo={};
 Page({
 
   /**
@@ -85,7 +87,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    if(app.globalData.isLogin==false){
+      isLogin=false;
+    }
+    else{
+      isLogin=true;
+      userInfo=app.globalData.userInfo;
+      console.log(userInfo)
+    }
+    this.setData({
+      isLogin,
+      userInfo
+    })
   },
 
   /**
@@ -160,5 +173,10 @@ Page({
       //           wx.stopPullDownRefresh() //停止下拉刷新
       //       }
       //   })
+  },
+  login:function(res){
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
   }
 })
