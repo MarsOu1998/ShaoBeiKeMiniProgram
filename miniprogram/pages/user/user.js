@@ -186,7 +186,7 @@ Page({
       content: '确认退出登录？',
       success:function(res){
         if(res.confirm){
-          isLogin=false;
+          isLogin=app.globalData.isLogin=false;
           that.setData({
             isLogin
           })

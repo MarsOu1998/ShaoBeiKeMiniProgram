@@ -58,3 +58,8 @@
   width: 90%;
 }
 
+.border{
+  background-color: rgb(211, 206, 206);
+  height: 5rpx;
+  width: 100%
+}
