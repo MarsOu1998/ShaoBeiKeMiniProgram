@@ -36,6 +36,25 @@
   text-align: center;
 }
 
+.collection{
+  margin-top: 50rpx;
+  padding: 0rpx 20rpx;
+  width: 100%;
+  height: 80rpx;
+  background-color: white;
+  color:grey;
+  display: flex;
+  align-items: center;
+  
+}
 
+.collection image{
+  height: 60rpx;
+  width: 60rpx;
+}
 
+.logout{
+  margin-top: 100rpx;
+  width: 90%;
+}
 

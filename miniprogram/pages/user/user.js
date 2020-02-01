@@ -178,5 +178,21 @@ Page({
     wx.navigateTo({
       url: '/pages/login/login',
     })
+  },
+  logout:function(){
+    var that=this;
+    wx.showModal({
+      title: '退出登录',
+      content: '确认退出登录？',
+      success:function(res){
+        if(res.confirm){
+          isLogin=false;
+          that.setData({
+            isLogin
+          })
+        }
+      }
+    })
+    
   }
 })

@@ -58,7 +58,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 3,
 					"name": "个人中心",
 					"pathName": "pages/user/user",
 					"query": "",
