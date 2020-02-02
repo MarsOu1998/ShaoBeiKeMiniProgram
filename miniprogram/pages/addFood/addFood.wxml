@@ -1,15 +1,75 @@
 <!--pages/addFood/addFood.wxml-->
-<view class="container">
-    <view class="foodBox bigImg" bindtap="loadBigImg">
-        步骤一：上传主图
-        <image src="/pages/img/我做的菜.jpg"/>
+<view>
+    <view class="title-image" bindtap="loadBigImg">
+        <text wx:if="{{!isClick}}">点击上传封面图</text>
+        <image src="{{tempPath}}"/>
     </view>
-    <view class="foodBox title">
-        步骤二：菜名
-        <input type='text' placeholder="如水煮牛肉"/>
+</view>
+
+<!--pages/detailFood/detailFood.wxml-->
+
+<view class="detail-container">
+    <!-- 菜品标题 -->
+  <text class="title-text">{{detail.title}}</text>
+  
+  <!-- 菜品收藏点赞量 -->
+  <view class="like-save-count">
+    <view class="author">
+        <image src="../img/tou02.png"></image>
+        {{detail.author}}
     </view>
-     <view class="foodBox title">
-        步骤三：介绍
-        <input type='text' placeholder="如麻辣下饭"/>
+    <view class="like-count">
+        <image src="../img/like02.png"></image>
+        {{detail.like}}
     </view>
+    <view class="save-count">
+        <image src="../img/save04.png"></image>
+        {{detail.save}}
+    </view>
+  </view>
+  <!-- 菜品描述 -->
+  <view class="food-text">
+    {{detail.foodText}}
+  </view>
+  <!-- 菜品难度、时间 -->
+  <view class="food-time">
+    <view>烹饪难度：<text>{{detail.foodGrade}}</text></view>
+    <view>烹饪时间：<text>{{detail.foodTime}}</text></view>
+  </view>
+  <!-- 食材清单 -->
+  <view class="food-listbox01">
+    <view class="food-list-title">——食材清单——</view>
+    <view class="food-list" >
+      <view class="food-item" wx:for="{{detail.materialListArr}}">
+        <text>{{item.name}}</text>
+        <text>{{item.count}}g</text>
+      </view>
+    </view>
+  </view>
+  <!-- 做法步骤 -->
+  <view class="way-listbox">
+    <view class="food-list-title">——做法步骤——</view>
+     <view class="way-list">
+      <view class="way-item" wx:for="{{detail.wayListArr}}">
+        <text>{{index+1}}</text>{{item}}
+      </view>
+     </view>
+  </view>
+  <!-- 图片分享 -->
+  <view class="pic-listbox">
+     <view class="food-list-title">——图片分享——</view>
+     <view class="pic-list">
+      <view class="pic-item" wx:for="{{detail.picListArr}}">
+        <text>{{index+1}}</text>
+        <image src="{{item}}"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 烹饪小窍门 -->
+  <view class="little-tip">
+    <view class="food-list-title">——烹饪小窍门——</view>
+    <view class="tip-content">
+        {{detail.tipContent}}
+    </view>
+  </view>
 </view>
