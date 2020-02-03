@@ -163,6 +163,8 @@ Page({
    */
   loadBigImg:function(){
     var that=this;
+    var timestamp = (new Date()).valueOf();
+    console.log("时间戳:"+timestamp);
       wx.chooseImage({
           success: function (res) {
               wx.getImageInfo({
@@ -173,9 +175,21 @@ Page({
                       isClick=true;
                       that.setData({
                         tempPath,isClick
-                      })
+                      });
+                    wx.cloud.uploadFile({
+                      cloudPath: timestamp + '.png',
+                      filePath: tempPath,
+                      success: function (res) {
+                        console.log("上传成功")
+                        console.log(res)
+                      },
+                      fail:function(res){
+                        console.error(res)
+                      }
+                    })
                   }
-              })
+              });
+              
           }
       })
   },
