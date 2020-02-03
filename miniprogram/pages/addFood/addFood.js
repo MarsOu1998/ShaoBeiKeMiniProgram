@@ -1,4 +1,4 @@
-var tempPath;
+var tempPath;//暂存封面图
 var isClick;//若用户已上传封面图，则隐藏提示字样
 var degree;//烹饪难度picker选项数组
 var time;//烹饪时间picker选项数组
@@ -6,13 +6,16 @@ var index;
 var timeIndex;
 var add=1;
 var step=1;
-
+var indexImg=1;
+var share = ['/images/uploadImg.png'];//暂存用户分享的图片
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    share:['/images/uploadImg.png'],
+    indexImg:1,
     step:1,
     add:1,
     time:['10分钟及以下','20分钟','30分钟','40分钟','50分钟','60分钟及以上'],
@@ -176,17 +179,17 @@ Page({
                       that.setData({
                         tempPath,isClick
                       });
-                    wx.cloud.uploadFile({
-                      cloudPath: timestamp + '.png',
-                      filePath: tempPath,
-                      success: function (res) {
-                        console.log("上传成功")
-                        console.log(res)
-                      },
-                      fail:function(res){
-                        console.error(res)
-                      }
-                    })
+                    // wx.cloud.uploadFile({
+                    //   cloudPath: timestamp + '.png',
+                    //   filePath: tempPath,
+                    //   success: function (res) {
+                    //     console.log("上传成功")
+                    //     console.log(res)
+                    //   },
+                    //   fail:function(res){
+                    //     console.error(res)
+                    //   }
+                    // })
                   }
               });
               
@@ -233,5 +236,30 @@ Page({
         step
       })
     }
+  },
+  shareImg:function(){
+    var that=this;
+    wx.chooseImage({
+      success: function(res) {
+        console.log(res);
+        share.push(res.tempFilePaths[0])
+        console.log(share)
+        share.splice(indexImg-1,1);
+        share.push('/images/uploadImg.png');
+        indexImg++;
+        that.setData({
+          share,indexImg
+        })
+      },
+    })
+  },
+  cancel:function(event){
+    console.log(event.currentTarget.id);
+    var id = event.currentTarget.id;
+    share.splice(id,1);
+    indexImg--;
+    this.setData({
+      share, indexImg
+    })
   }
 })

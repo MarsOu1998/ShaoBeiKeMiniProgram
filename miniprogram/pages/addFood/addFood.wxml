@@ -72,9 +72,11 @@
   <view class="pic-listbox">
      <view class="food-list-title">——图片分享——</view>
      <view class="pic-list">
-      <view class="pic-item" wx:for="{{detail.picListArr}}">
+      <view class="pic-item" wx:for="{{indexImg}}">
         <text>{{index+1}}</text>
-        <image src="{{item}}"></image>
+        <text style="margin-left:250rpx;color:red;" bindtap="cancel" id="{{index}}">x</text>
+        <image src="{{share[index]}}" bindtap="shareImg" style=""></image>
+       
       </view>
     </view>
   </view>
