@@ -35,6 +35,7 @@
     color:#7E5E48;
 }
 .title-text{
+  margin: 0 120rpx;
   font-size:18pt;
   font-weight: bold;
   padding:25rpx 10rpx;
@@ -89,6 +90,7 @@
 }
 /**菜单说明**/
 .food-text{
+  margin-top: 30rpx;
   margin-bottom:70rpx;
    line-height: 180%;
    text-align:justify;
@@ -96,7 +98,9 @@
      /* text-align-last:justify; */
 }
 .food-time{
+  
   width:100%;
+  font-size: 30rpx;
   /* line-height: 180%; */
 }
 .food-time view{
@@ -248,4 +252,32 @@
 }
 
 
+.food{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #A7A7A7;
+  margin-top: 20rpx;
+}
 
+.add {
+  margin-top: 10rpx;
+  float:right;
+}
+.add image{
+  height: 50rpx;
+  width: 50rpx;
+}
+.minus{
+  margin-top: 10rpx;
+  float:left;
+}
+
+.minus image{
+  height: 60rpx;
+  width: 60rpx;
+}
+
+.step{
+  border-bottom: 1rpx solid #C3C3C3;
+  
+}

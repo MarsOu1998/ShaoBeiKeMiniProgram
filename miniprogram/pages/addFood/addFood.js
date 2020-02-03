@@ -1,11 +1,24 @@
 var tempPath;
 var isClick;//若用户已上传封面图，则隐藏提示字样
+var degree;//烹饪难度picker选项数组
+var time;//烹饪时间picker选项数组
+var index;
+var timeIndex;
+var add=1;
+var step=1;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    step:1,
+    add:1,
+    time:['10分钟及以下','20分钟','30分钟','40分钟','50分钟','60分钟及以上'],
+    timeIndex:0,
+    index:0,
+    degree:['简单','一般','较难'],
     detail: {
       id: 1,
       imgUrl: '/pages/img/西红柿牛腩.jpg',
@@ -165,5 +178,46 @@ Page({
               })
           }
       })
+  },
+  select:function(event){
+    index=event.detail.value;
+    this.setData({
+      index
+    })
+
+  },
+  timeChange:function(event){
+    timeIndex = event.detail.value;
+    this.setData({
+      timeIndex
+    })
+  },
+  addChange:function(event){
+    add++;
+    this.setData({
+      add
+    })
+  },
+  minusChange:function(res){
+    if(add!=1){
+      add--;
+      this.setData({
+        add
+      })
+    }
+  },
+  addStep: function (event) {
+    step++;
+    this.setData({
+      step
+    })
+  },
+  minusStep: function (res) {
+    if (step != 1) {
+      step--;
+      this.setData({
+        step
+      })
+    }
   }
 })
