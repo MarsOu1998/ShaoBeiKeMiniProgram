@@ -1,7 +1,11 @@
 var tempPath;//暂存封面图
+var cover;//存放封面图上传后的file ID
+var shareGroup=[];//存放分享图片数组上传后的file ID
+var share
 var isClick;//若用户已上传封面图，则隐藏提示字样
 var isName=false;//用户是否已经输入菜品名称
 var isBrief=false;//用户是否已经输入菜品简介
+var isShare=false;//用户是否已经上传分享图片
 var degree;//烹饪难度picker选项数组
 var time;//烹饪时间picker选项数组
 var index;
@@ -171,8 +175,6 @@ Page({
    */
   loadBigImg:function(){
     var that=this;
-    var timestamp = (new Date()).valueOf();
-    console.log("时间戳:"+timestamp);
       wx.chooseImage({
           success: function (res) {
               wx.getImageInfo({
@@ -184,17 +186,7 @@ Page({
                       that.setData({
                         tempPath,isClick
                       });
-                    // wx.cloud.uploadFile({
-                    //   cloudPath: timestamp + '.png',
-                    //   filePath: tempPath,
-                    //   success: function (res) {
-                    //     console.log("上传成功")
-                    //     console.log(res)
-                    //   },
-                    //   fail:function(res){
-                    //     console.error(res)
-                    //   }
-                    // })
+                    
                   }
               });
               
@@ -240,11 +232,13 @@ Page({
   },
   minusStep: function (res) {
     if (step != 1) {
+      stepGroup.splice(step-1,1);
       step--;
+      console.log(stepGroup)
       this.setData({
         step
       })
-    }
+    } 
   },
   shareImg:function(){
     var that=this;
@@ -256,6 +250,11 @@ Page({
         share.splice(indexImg-1,1);
         share.push('/images/uploadImg.png');
         indexImg++;
+        if(indexImg>1){
+          isShare=true;
+        }else{
+          isShare=false;
+        }
         that.setData({
           share,indexImg
         })
@@ -268,6 +267,11 @@ Page({
     if(id!=(indexImg-1)){
       share.splice(id, 1);
       indexImg--;
+      if (indexImg > 1) {
+        isShare = true;
+      } else {
+        isShare = false;
+      }
       this.setData({
         share, indexImg
       })
@@ -312,6 +316,75 @@ Page({
   }
   ,
   upload:function(){
-    
+    wx.showModal({
+      title: '确认上传',
+      content: '确定上传吗',
+      success:function(res){
+        if(res.confirm){
+          if(!isClick){
+            wx.showToast({
+              title: '尚未上传封面图',
+              icon:'none'
+            })
+          } else if (!isName) {
+              wx.showToast({
+                title: '尚未填写菜品名称',
+                icon: 'none'
+              })
+            
+          }
+          else if(!isBrief){
+            wx.showToast({
+              title: '尚未填写菜品简介',
+              icon: 'none'
+            })
+          }else if(!isShare){
+            wx.showToast({
+              title: '尚未上传分享图片',
+              icon: 'none'
+            })
+          }
+          else{
+            wx.showLoading({
+              title: '上传中',
+              mask: true
+            })
+            share.splice(indexImg-1,1);
+            console.log(share);
+            var timestamp = (new Date()).valueOf();
+            wx.cloud.uploadFile({
+                      cloudPath: timestamp + '.png',
+                      filePath: tempPath,
+                      success: function (res) {
+                        console.log("封面上传成功")
+                        console.log(res)
+                        cover=res.fileID;
+                        
+                      },
+                      fail:function(res){
+                        console.error(res)
+                      }
+                    })
+            console.log(share.length)
+                for(var i=0;i<share.length;i++){
+                  var timestamp = (new Date()).valueOf();
+                  wx.cloud.uploadFile({
+                    cloudPath: timestamp + '.png',
+                    filePath: share[i],
+                    success: function (res) {
+                      
+                      shareGroup.push(res.fileID)
+                      console.log("shareGroup"+shareGroup)
+
+                    },
+                    fail: function (res) {
+                      console.error(res)
+                    }
+                  })
+                }
+          }
+        }
+      }
+    })
   }
 })

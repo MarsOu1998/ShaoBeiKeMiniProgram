@@ -90,5 +90,5 @@
 </view>
 
 <view>
-  <button class="btn" type="primary">上传</button>
+  <button class="btn" type="primary" bindtap="upload">上传</button>
 </view>

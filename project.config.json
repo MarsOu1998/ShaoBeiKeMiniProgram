@@ -65,7 +65,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "上传食谱",
 					"pathName": "pages/addFood/addFood",
 					"query": "",
