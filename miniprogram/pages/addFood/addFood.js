@@ -1,5 +1,7 @@
 var tempPath;//暂存封面图
 var isClick;//若用户已上传封面图，则隐藏提示字样
+var isName=false;//用户是否已经输入菜品名称
+var isBrief=false;//用户是否已经输入菜品简介
 var degree;//烹饪难度picker选项数组
 var time;//烹饪时间picker选项数组
 var index;
@@ -8,6 +10,9 @@ var add=1;
 var step=1;
 var indexImg=1;
 var share = ['/images/uploadImg.png'];//暂存用户分享的图片
+var materialGroup=[];
+var weightGroup=[];
+var stepGroup=[];
 Page({
 
   /**
@@ -151,9 +156,9 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
-  },
+  // onReachBottom: function () {
+  // console.log("123")
+  // },
 
   /**
    * 用户点击右上角分享
@@ -217,7 +222,11 @@ Page({
   },
   minusChange:function(res){
     if(add!=1){
+      materialGroup.splice(add-1,1);
+      weightGroup.splice(add - 1, 1);
       add--;
+      console.log(materialGroup);
+      console.log(weightGroup);
       this.setData({
         add
       })
@@ -256,10 +265,53 @@ Page({
   cancel:function(event){
     console.log(event.currentTarget.id);
     var id = event.currentTarget.id;
-    share.splice(id,1);
-    indexImg--;
-    this.setData({
-      share, indexImg
-    })
+    if(id!=(indexImg-1)){
+      share.splice(id, 1);
+      indexImg--;
+      this.setData({
+        share, indexImg
+      })
+    }
+    
+  },
+  foodName:function(event){
+    //console.log(event.detail.value);
+    if (event.detail.value == "" || event.detail.value==" "){
+      isName=false;
+    }
+    else{
+      isName=true;
+    }
+    console.log("isName:"+isName)
+  },
+  brief:function(event){
+    if (event.detail.value == "" || event.detail.value == " ") {
+      isBrief = false;
+    }
+    else {
+      isBrief = true;
+    }
+    console.log("isBrief:" + isBrief)
+  },
+  material:function(event){
+    //console.log(event.currentTarget.id);
+    var id = event.currentTarget.id;
+    materialGroup.splice(id,1,event.detail.value);
+    console.log(materialGroup);
+  },
+  weight:function(event){
+    var id = event.currentTarget.id;
+    weightGroup.splice(id, 1, event.detail.value);
+    console.log(weightGroup);
+  }
+  ,
+  stepInput:function(event){
+    var id = event.currentTarget.id;
+    stepGroup.splice(id, 1, event.detail.value);
+    console.log(stepGroup);
+  }
+  ,
+  upload:function(){
+    
   }
 })

@@ -11,13 +11,13 @@
 <view class="detail-container">
     <!-- 菜品标题 -->
   <view class="title-text">
-  <input placeholder="菜品名称" style="text-align:center">
+  <input placeholder="菜品名称" style="text-align:center" bindinput="foodName">
   </input>
   </view>
   
   <!-- 菜品描述 -->
   <view class="food-text">
-    <textarea placeholder="在此输入菜品简介，好的菜谱从吸引人的简介开始。"></textarea>
+    <textarea placeholder="在此输入菜品简介，好的菜谱从吸引人的简介开始。" bindinput="brief"></textarea>
   </view>
   <!-- 菜品难度、时间 -->
   <view class="food-time">
@@ -34,10 +34,10 @@
 
       <view class="food" wx:for="{{add}}">
       <view style="width:50%">
-      <input placeholder="食材"></input>
+      <input placeholder="食材" bindinput="material" id="{{index}}"></input>
       </view>
       <view style="width:30%">
-      <input placeholder="重量" ></input>
+      <input placeholder="重量" bindinput="weight" id="{{index}}"></input>
       </view>
       </view>
       
@@ -56,7 +56,7 @@
 
       <view class="way-item" wx:for="{{step}}" class="step">
         <text>{{index+1}}</text>
-        <textarea></textarea>
+        <textarea bindinput="stepInput" id="{{index}}"></textarea>
       </view>
 
        <view class="minus">
@@ -84,7 +84,11 @@
   <view class="little-tip">
     <view class="food-list-title">——烹饪小窍门——</view>
     <view class="tip-content">
-        {{detail.tipContent}}
+       <textarea placeholder="在此输入烹饪小窍门。"></textarea>
     </view>
   </view>
+</view>
+
+<view>
+  <button class="btn" type="primary">上传</button>
 </view>

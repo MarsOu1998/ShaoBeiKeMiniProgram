@@ -281,3 +281,6 @@
   border-bottom: 1rpx solid #C3C3C3;
   
 }
+.btn{
+  width: 80%;
+}
