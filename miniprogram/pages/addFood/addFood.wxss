@@ -282,5 +282,6 @@
   
 }
 .btn{
+  margin-top: 20rpx;
   width: 80%;
 }

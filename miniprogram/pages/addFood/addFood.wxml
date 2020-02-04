@@ -84,9 +84,13 @@
   <view class="little-tip">
     <view class="food-list-title">——烹饪小窍门——</view>
     <view class="tip-content">
-       <textarea placeholder="在此输入烹饪小窍门。"></textarea>
+       <textarea placeholder="在此输入烹饪小窍门。" bindinput="skill"></textarea>
     </view>
   </view>
+</view>
+
+<view>
+<picker range="{{sort}}">菜品类型：{{sort[sortIndex]}}</picker>
 </view>
 
 <view>
