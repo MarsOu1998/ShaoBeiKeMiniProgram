@@ -10,8 +10,8 @@ exports.main = async (event, context) => {
     return await db.collection('food').add({
       data:{
         author:event.author,
-        collectionNumber:0,
-        like:0,
+        collectionNumber:888,
+        like:999,
         cover: event.cover,
         name: event.name,
         brief: event.brief,

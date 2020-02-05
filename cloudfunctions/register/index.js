@@ -12,7 +12,8 @@ exports.main = async (event, context) => {
       account:event.account,
       password:event.password,
       collection:[],
-      share:[]
+      share:[],
+      like:[]
     },
     success: function (res) {
       return res

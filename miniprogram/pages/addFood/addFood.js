@@ -28,6 +28,7 @@ var materialGroup=[];
 var weightGroup=[];
 var stepGroup=[];
 var isLoad=false;
+var sent=[];//存储用户发布的菜谱id
 Page({
 
   /**
@@ -298,7 +299,7 @@ Page({
                         wx.cloud.callFunction({
                           name:'upload',
                           data:{
-                            author:userInfo['account'],
+                            author:'烧贝壳',
                             cover: cover,
                             name:inputName,
                             brief:inputBrief,
@@ -312,6 +313,20 @@ Page({
                             sort:sortType
                           },
                           success:function(res){
+                            console.log(res)
+                            sent.push(res.result['_id'])
+                            console.log(sent)
+                            wx.cloud.callFunction({
+                              name:'updateUserInfo',
+                              data:{
+                                account:'烧贝壳',
+                                share:sent
+                              },
+                              success:function(res){
+                                console.log("用户数据库更新成功")
+                              }
+                            })
+
                             console.log("上传成功")
                             wx.hideLoading();
                               wx.showToast({
@@ -351,5 +366,18 @@ Page({
       }
     })
     }
+  },
+  onShow:function(res){
+    wx.cloud.callFunction({
+      name:'searchAccount',
+      data:{
+        account:'烧贝壳'
+      },
+      success:function(res){
+        console.log(res)
+        sent=res.result.data[0]['share'];
+        console.log(sent)
+      }
+    })
   }
 })

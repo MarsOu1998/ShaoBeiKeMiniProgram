@@ -18,7 +18,7 @@ App({
     this.globalData = {
       isLogin:false,
       userInfo:{},
-      id:''
+      id:'',
     }
   }
 })

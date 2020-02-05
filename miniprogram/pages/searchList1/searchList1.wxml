@@ -26,7 +26,7 @@
             <rich-text>{{item.name}}</rich-text>
             <view>{{item. material}}</view>
             <view>{{item.author}}</view>
-            <text>收藏{{item.collectionNumberx}}</text><text> 点赞{{item.like}}</text>
+            <text>收藏{{item.collectionNumber}}</text><text> 点赞{{item.like}}</text>
         </view>
     </view>
   </view>
