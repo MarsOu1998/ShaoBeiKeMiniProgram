@@ -75,6 +75,7 @@
 }
 .food-time{
   width:100%;
+  font-size: 30rpx;
   /* line-height: 180%; */
 }
 .food-time view{

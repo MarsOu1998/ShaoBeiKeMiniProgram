@@ -1,10 +1,17 @@
-// pages/searchList/searchList.js
+var app=getApp();
+var isSearch=false;
+var searchGroup=[];
+var page=0;
+var name;
+var noMore=false;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isSearch:false,
+    noMore:false,
     searchListArr: [
       {
         id: 1,
@@ -114,55 +121,78 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  /**
    * 上拉加载更多
    */
   onReachBottom: function () {
-    if (!this.data.noMore) {
-      var that = this;
-      console.log('circle 下一页');
-      this.setData({
-        isLoading: true
-      })
-      var timer = setTimeout(function () {
-        console.log(888);
-        that.setData({
-          isLoading: false
-        })
-        clearTimeout(timer);
-      }, 1000)
+    var that=this;
+    if(isSearch&&!noMore){
+    page+=19;
+    wx.cloud.callFunction({
+      name: 'search',
+      data: {
+        name: name,
+        page: page
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.result.data.length != 0) {
+          for (var i = 0; i < res.result.data.length; i++) {
+            searchGroup.push(res.result.data[i])
+          }
+          console.log(searchGroup)
+          that.setData({
+            isSearch, searchGroup
+          })
+        }
+        else if (res.result.data.length == 0){
+          noMore=true;
+          that.setData({
+            noMore
+          })
+        }
+      }
+
+    })
     }
-
-
-    //   wx.request({
-    //       url: '',
-    //       data: {},
-    //       method: 'GET',
-    //       // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-    //       // header: {}, // 设置请求的 header
-    //       success: function (res) {
-    //           // success
-    //       },
-    //       fail: function () {
-    //           // fail
-    //       },
-    //       complete: function () {
-    //           // complete
-    //           wx.hideNavigationBarLoading() //完成停止加载
-    //           wx.stopPullDownRefresh() //停止下拉刷新
-    //       }
-    //   })
+  
+  },
+  search:function(event){
+    var that=this;
+    isSearch=true;
+    searchGroup=[];
+    noMore=false;
+    this.setData({
+      noMore
+    })
+    console.log(event.detail.value);
+    name = event.detail.value;
+    wx.cloud.callFunction({
+      name:'search',
+      data:{
+        name:name,
+        page:page
+      },
+      success:function(res){
+        console.log(res)
+        if(res.result.data.length!=0){
+          for (var i = 0; i < res.result.data.length;i++){
+            searchGroup.push(res.result.data[i])
+          }
+          console.log(searchGroup)
+          that.setData({
+            isSearch,searchGroup
+          })
+        }
+      }
+    })
+  },
+  jumpDetial:function(event){
+    var id = event.currentTarget.id;
+    console.log(id)
+    app.globalData.id = searchGroup[id]['_id']
+    console.log(app.globalData.id)
+    wx.navigateTo({
+      url: '/pages/detailFood/detailFood',
+    })
   }
 })

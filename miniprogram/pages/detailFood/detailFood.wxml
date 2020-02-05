@@ -8,45 +8,45 @@
 <view class="content">
 <!-- 菜品图片 -->
   <view class="title-image">
-    <image src="{{detail.imgUrl}}"></image>
+    <image src="{{food['cover']}}"></image>
   </view>
 </view>
 
 <view class="container detail-container">
     <!-- 菜品标题 -->
-  <text class="title-text">{{detail.title}}</text>
+  <text class="title-text">{{food['name']}}</text>
   
   <!-- 菜品收藏点赞量 -->
   <view class="like-save-count">
     <view class="author">
         <image src="../img/tou02.png"></image>
-        {{detail.author}}
+        {{food['author']}}
     </view>
     <view class="like-count">
         <image src="../img/like02.png"></image>
-        {{detail.like}}
+        {{food['like']}}
     </view>
     <view class="save-count">
         <image src="../img/save04.png"></image>
-        {{detail.save}}
+        {{food['collectionNumber']}}
     </view>
   </view>
   <!-- 菜品描述 -->
   <view class="food-text">
-    {{detail.foodText}}
+    {{food['brief']}}
   </view>
   <!-- 菜品难度、时间 -->
   <view class="food-time">
-    <view>烹饪难度：<text>{{detail.foodGrade}}</text></view>
-    <view>烹饪时间：<text>{{detail.foodTime}}</text></view>
+    <view>烹饪难度：<text>{{food['degree']}}</text></view>
+    <view>烹饪时间：<text>{{food['time']}}</text></view>
   </view>
   <!-- 食材清单 -->
   <view class="food-listbox01">
     <view class="food-list-title">——食材清单——</view>
     <view class="food-list" >
-      <view class="food-item" wx:for="{{detail.materialListArr}}">
-        <text>{{item.name}}</text>
-        <text>{{item.count}}g</text>
+      <view class="food-item" wx:for="{{food['material']}}">
+        <text>{{item}}</text>
+        <text>{{food['weight'][index]}}</text>
       </view>
     </view>
   </view>
@@ -54,7 +54,7 @@
   <view class="way-listbox">
     <view class="food-list-title">——做法步骤——</view>
      <view class="way-list">
-      <view class="way-item" wx:for="{{detail.wayListArr}}">
+      <view class="way-item" wx:for="{{food['step']}}">
         <text>{{index+1}}</text>{{item}}
       </view>
      </view>
@@ -63,7 +63,7 @@
   <view class="pic-listbox">
      <view class="food-list-title">——图片分享——</view>
      <view class="pic-list">
-      <view class="pic-item" wx:for="{{detail.picListArr}}">
+      <view class="pic-item" wx:for="{{food['share']}}">
         <text>{{index+1}}</text>
         <image src="{{item}}"></image>
       </view>
@@ -73,7 +73,7 @@
   <view class="little-tip">
     <view class="food-list-title">——烹饪小窍门——</view>
     <view class="tip-content">
-        {{detail.tipContent}}
+        {{food['skill']}}
     </view>
   </view>
 </view>

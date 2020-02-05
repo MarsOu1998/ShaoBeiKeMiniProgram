@@ -17,10 +17,10 @@
   
   <!-- 菜品描述 -->
   <view class="food-text">
-    <textarea placeholder="在此输入菜品简介，好的菜谱从吸引人的简介开始。" bindinput="brief"></textarea>
+    <textarea placeholder="在此输入菜品简介，好的菜谱从吸引人的简介开始。" maxlength="-1" bindinput="brief"></textarea>
   </view>
   <!-- 菜品难度、时间 -->
-  <view class="food-time">
+  <view class="food-time" style="margin-top:180rpx;">
     <view>
     <picker range="{{degree}}" bindchange="select">
   烹饪难度：{{degree[index]}}</picker>
@@ -56,7 +56,7 @@
 
       <view class="way-item" wx:for="{{step}}" class="step">
         <text>{{index+1}}</text>
-        <textarea bindinput="stepInput" id="{{index}}"></textarea>
+        <textarea bindinput="stepInput" id="{{index}}" maxlength="-1"></textarea>
       </view>
 
        <view class="minus">
@@ -84,7 +84,7 @@
   <view class="little-tip">
     <view class="food-list-title">——烹饪小窍门——</view>
     <view class="tip-content">
-       <textarea placeholder="在此输入烹饪小窍门。" bindinput="skill"></textarea>
+       <textarea placeholder="在此输入烹饪小窍门。" bindinput="skill" maxlength="-1"></textarea>
     </view>
   </view>
 </view>

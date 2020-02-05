@@ -70,6 +70,20 @@
 					"pathName": "pages/addFood/addFood",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "最受欢迎家常菜谱",
+					"pathName": "pages/searchList1/searchList1",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "食谱详情页面",
+					"pathName": "pages/detailFood/detailFood",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
