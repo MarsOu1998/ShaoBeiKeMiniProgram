@@ -1,11 +1,14 @@
+var app=getApp()
 var tempPath;//暂存封面图
 var cover;//存放封面图上传后的file ID
-var shareGroup=[];//存放分享图片数组上传后的file ID
+var imgGroup=[];//存放上传后的图片ID
+var shareGroup=[];//存放分享图片数组上传后的临时路径
 var inputName;//存放菜品名称
 var inputBrief;//存放菜品简介
 var degreeType="简单";//存放烹饪难度;
 var timeType = "10分钟及以下";//存放烹饪时间
 var inputSkill;//存放小技巧
+var sortType;//存放菜品类型
 var share
 var isClick;//若用户已上传封面图，则隐藏提示字样
 var isName=false;//用户是否已经输入菜品名称
@@ -24,6 +27,7 @@ var sortIndex=0;
 var materialGroup=[];
 var weightGroup=[];
 var stepGroup=[];
+var isLoad=false;
 Page({
 
   /**
@@ -143,22 +147,32 @@ Page({
   },
   shareImg:function(){
     var that=this;
+    var timestamp = (new Date()).valueOf();
     wx.chooseImage({
       success: function(res) {
         console.log(res);
         share.push(res.tempFilePaths[0])
         console.log(share)
-        share.splice(indexImg-1,1);
+        share.splice(indexImg - 1, 1);
         share.push('/images/uploadImg.png');
         indexImg++;
-        if(indexImg>1){
-          isShare=true;
-        }else{
-          isShare=false;
+        if (indexImg > 1) {
+          isShare = true;
+        } else {
+          isShare = false;
         }
         that.setData({
-          share,indexImg
+          share, indexImg
         })
+        wx.cloud.uploadFile({
+          cloudPath: timestamp + '.png',
+          filePath: res.tempFilePaths[0],
+          success:function(res){
+            imgGroup.push(res.fileID);
+            console.log(imgGroup)
+          }
+        })
+       
       },
     })
   },
@@ -167,6 +181,7 @@ Page({
     var id = event.currentTarget.id;
     if(id!=(indexImg-1)){
       share.splice(id, 1);
+      imgGroup.splice(id,1)
       indexImg--;
       if (indexImg > 1) {
         isShare = true;
@@ -221,10 +236,22 @@ Page({
   },
   skill:function(event){
     inputSkill=event.detail.value;
+  },
+  sortChange:function(event){
+    sortIndex=event.detail.value;
+    switch(sortIndex){
+      case '0':sortType="最受欢迎家常菜谱";break;
+      case '1':sortType="闲情雅致下午茶";break;
+      case '2':sortType="色味俱全鲜香主食";break;
+    }
+    console.log(sortType)
+    this.setData({
+      sortIndex
+    })
   }
   ,
   upload:function(){
-    var i;
+    var userInfo=app.globalData.userInfo;
     wx.showModal({
       title: '确认上传',
       content: '确定上传吗',
@@ -268,52 +295,61 @@ Page({
                         console.log("封面上传成功")
                         console.log(res)
                         cover=res.fileID;
-                       
-                        for (i = 0; i < share.length; i++) {
-                          var timestamp = (new Date()).valueOf();
-                          wx.cloud.uploadFile({
-                            cloudPath: timestamp + '.png',
-                            filePath: share[i],
-                            success: function (res) {
-
-                              shareGroup.push(res.fileID)
-                              console.log("shareGroup:" + shareGroup)
-
-                            },
-                            fail: function (res) {
-                              console.error(res)
-                            }
-                          })
-                          
-                        }
-                        
+                        wx.cloud.callFunction({
+                          name:'upload',
+                          data:{
+                            author:userInfo['account'],
+                            cover: cover,
+                            name:inputName,
+                            brief:inputBrief,
+                            degree:degreeType,
+                            time:timeType,
+                            material:materialGroup,
+                            weight:weightGroup,
+                            step:stepGroup,
+                            share:imgGroup,
+                            skill:inputSkill,
+                            sort:sortType
+                          },
+                          success:function(res){
+                            console.log("上传成功")
+                            wx.hideLoading();
+                              wx.showToast({
+                                title: '上传成功',
+                                icon:'success',
+                                duration:2000,
+                                success:function(){ 
+                                  isLoad=true;
+                                  setTimeout(function(res){
+                                    wx.navigateBack({
+                                      
+                                    })
+                                  },1000)
+                                }
+                              })
+                            
+                          }
+                        })
                       },
                       fail:function(res){
                         console.error(res)
                       }
-                    })
-                  if(i==share.length){
-                    wx.cloud.callFunction({
-                      name:'upload',
-                      data:{
-                        cover:cover,
-                        name:inputName,
-                        brief:inputBrief,
-                        degree:degreeType,
-                        time:timeType,
-                        material:materialGroup,
-                        weight:weightGroup,
-                        step:stepGroup,
-                        share:shareGroup,
-                        skill:inputSkill,
-                      }
-                    })
-                  }
-                
-                
+                    })  
           }
         }
       }
     })
+  }
+  ,
+  onUnload:function(res){
+    if(!isLoad)
+    {
+      wx.cloud.deleteFile({
+      fileList:imgGroup,
+      success:function(res){
+        console.log("已取消上传分享图片")
+      }
+    })
+    }
   }
 })

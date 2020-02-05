@@ -90,7 +90,7 @@
 </view>
 
 <view>
-<picker range="{{sort}}">菜品类型：{{sort[sortIndex]}}</picker>
+<picker range="{{sort}}" bindchange="sortChange">菜品类型：{{sort[sortIndex]}}</picker>
 </view>
 
 <view>
