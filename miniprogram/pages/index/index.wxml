@@ -4,11 +4,11 @@
   <view class="swiper-box">
     <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-color="{{swiper.indicatorColor}}" indicator-active-color="{{swiper.indicatorActiveColor}}"
   autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}" circular="{{swiper.s}}">
-      <block wx:for="{{swiper.imgUrls}}">
+      <block wx:for="{{show}}">
         <swiper-item>
-            <navigator  data-id="{{item.id}}" url="{{item.navigator}}" hover-class="navigator-hover">
-                <image src="{{item.name}}" class="slide-image" />
-           </navigator>
+            
+                <image src="{{item.cover}}" class="slide-image" />
+           
         </swiper-item>
         
       </block>

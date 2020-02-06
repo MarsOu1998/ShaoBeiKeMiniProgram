@@ -9,7 +9,7 @@ Page({
           {
               id:1,
           name: '/pages/img/hb1.jpg',
-          navigator: "/pages/detailFood/detailFood?id=1"
+          navigator: "/pages/detailFood7/detailFood7"
           },
           {
               id: 1,
