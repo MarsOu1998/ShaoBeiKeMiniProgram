@@ -181,6 +181,20 @@ Page({
     console.log(event.currentTarget.id);
     var id = event.currentTarget.id;
     if(id!=(indexImg-1)){
+      console.log("123")
+      var deleteFile = [''];
+      console.log("imgGroup:" + imgGroup[id])
+      deleteFile.splice(0, 1, imgGroup[id]);
+      console.log("deleteFile:" + deleteFile)
+      wx.cloud.deleteFile({
+        fileList: deleteFile,
+        success: function (res) {
+          console.log("已取消上传分享图片")
+        },
+        fail:function(res){
+          console.error(res)
+        }
+      })
       share.splice(id, 1);
       imgGroup.splice(id,1)
       indexImg--;
@@ -299,7 +313,7 @@ Page({
                         wx.cloud.callFunction({
                           name:'upload',
                           data:{
-                            author:'烧贝壳',
+                            author: app.globalData.userInfo['account'],
                             cover: cover,
                             name:inputName,
                             brief:inputBrief,
@@ -314,12 +328,13 @@ Page({
                           },
                           success:function(res){
                             console.log(res)
+                            console.log("此食谱id为" + res.result['_id'])
                             sent.push(res.result['_id'])
-                            console.log(sent)
+                            console.log("sent:"+sent)
                             wx.cloud.callFunction({
                               name:'updateUserInfo',
                               data:{
-                                account:'烧贝壳',
+                                _id: app.globalData.userInfo['_id'],
                                 share:sent
                               },
                               success:function(res){
@@ -371,7 +386,7 @@ Page({
     wx.cloud.callFunction({
       name:'searchAccount',
       data:{
-        account:'烧贝壳'
+        account:app.globalData.userInfo['account']
       },
       success:function(res){
         console.log(res)

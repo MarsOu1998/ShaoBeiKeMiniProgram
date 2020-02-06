@@ -44,7 +44,7 @@
       <view class="minus">
       <image src="/images/minus.png" bindtap="minusChange"></image>
       </view>
-      <view class="add">
+      <view class="add"> 
         <image src="/images/add.png" bindtap="addChange"></image>
       </view>
     </view>
@@ -59,10 +59,10 @@
         <textarea bindinput="stepInput" id="{{index}}" maxlength="-1"></textarea>
       </view>
 
-       <view class="minus">
+       <view class="minus" style="margin-top:150rpx;">
       <image src="/images/minus.png" bindtap="minusStep"></image>
       </view>
-      <view class="add">
+      <view class="add" style="margin-top:150rpx;">
         <image src="/images/add.png" bindtap="addStep"></image>
       </view>
 
