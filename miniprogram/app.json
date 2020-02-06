@@ -10,7 +10,8 @@
     "pages/searchList3/searchList3",
     "pages/addFood/addFood",
     "pages/login/login",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/collection/collection"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,10 +38,16 @@
         "text": "分类"
       },
       {
-        "selectedIconPath": "pages/img/save02.png",
-        "iconPath": "pages/img/save01.png",
+        "selectedIconPath": "pages/img/user2.png",
+        "iconPath": "pages/img/user.png",
         "pagePath": "pages/user/user",
         "text": "我的"
+      },
+      {
+        "selectedIconPath": "pages/img/save02.png",
+        "iconPath": "pages/img/save01.png",
+        "pagePath": "pages/collection/collection",
+        "text": "收藏"
       }
     ]
   },
