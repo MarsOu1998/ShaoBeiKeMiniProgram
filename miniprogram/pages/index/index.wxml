@@ -6,8 +6,7 @@
   autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}" circular="{{swiper.s}}">
       <block wx:for="{{show}}">
         <swiper-item>
-            
-                <image src="{{item.cover}}" class="slide-image" />
+                <image src="{{item.cover}}" class="slide-image"  id="{{index}}" bindtap="jumpDetail" />
            
         </swiper-item>
         
