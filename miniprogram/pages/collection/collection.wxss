@@ -1,1 +1,12 @@
-/* pages/collection/collection.wxss */
+.empty{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.empty image{
+  height: 300rpx;
+  width:300rpx;
+ 
+}

@@ -1,5 +1,6 @@
 var app=getApp()
 var food=[];
+var collection=[];
 Page({
 
   /**
@@ -21,6 +22,7 @@ Page({
    */
   onShow: function () {
     var that=this;
+    collection=[];
     wx.cloud.callFunction({
       name:'searchById',
       data:{
@@ -32,6 +34,39 @@ Page({
         console.log(food)
         that.setData({
           food
+        })
+        wx.cloud.callFunction({
+          name:'searchAccount',
+          data:{
+            account:'烧贝壳'
+          },
+          success:function(res){
+            console.log(res)
+              collection=res.result.data[0]['collection'];
+              console.log("collection:"+collection)
+              var i=0;
+              for(i=0;i<collection.length;i++){
+                if(app.globalData.id==collection[i]){
+                  that.setData({
+                    addSave: {
+                      add: true,
+                      url: '../img/save04.png'
+                    }
+                  }) 
+                  break;
+                }
+              }
+            if (i == collection.length){
+              that.setData({
+                addSave: {
+                  add: false,
+                  url: '../img/save03.png'
+                }
+              })
+            }
+              
+            
+          }
         })
       }
     })
