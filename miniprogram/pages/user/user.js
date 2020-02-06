@@ -85,15 +85,17 @@ Page({
     })
   },
   onReachBottom: function () {
-    var that = this;
+    var that = this; 
+    console.log(noMore) 
       if (!noMore) {
-        page += 19;
+        page += 27;
         wx.cloud.callFunction({
           name: 'searchAll',
           data: {
-            page: page
+            count: page
           },
           success: function (res) {
+            console.log(res)
             if (res.result.data.length != 0) {
               for (var i = 0; i < res.result.data.length; i++) {
                 show.push(res.result.data[i])
@@ -112,6 +114,16 @@ Page({
           }
         })
       }
+  },
+  myfood:function(res){
+    wx.navigateTo({
+      url: '/pages/myFood/myFood',
+    })
+  },
+  myfood:function(){
+    wx.navigateTo({
+      url: '/pages/myFood/myFood',
+    })
   }
 
 })

@@ -51,7 +51,7 @@ Page({
   onReachBottom: function () {
     var that=this;
     if(isSearch&&!noMore){
-    page+=19;
+    page+=21;
     wx.cloud.callFunction({
       name: 'search',
       data: {
@@ -81,7 +81,7 @@ Page({
     }
     else{
       if(!noMore){
-        page+=19;
+        page+=21;
         wx.cloud.callFunction({
           name:'searchByType',
           data:{

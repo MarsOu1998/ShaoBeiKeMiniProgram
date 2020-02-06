@@ -11,7 +11,8 @@
     "pages/addFood/addFood",
     "pages/login/login",
     "pages/register/register",
-    "pages/collection/collection"
+    "pages/collection/collection",
+    "pages/myFood/myFood"
   ],
   "window": {
     "backgroundTextStyle": "light",
