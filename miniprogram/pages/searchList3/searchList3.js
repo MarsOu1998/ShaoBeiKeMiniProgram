@@ -1,118 +1,155 @@
-// pages/searchList3/searchList3.js
+var app = getApp();
+var isSearch = false;
+var searchGroup = [];
+var page = 0;
+var name;
+var noMore = false;
+var showFood = [];
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    searchListArr: [
-      {
-        id: 3,
-        imgUrl: '/pages/img/大碗宽面.jpg',
-        title: '大碗宽面',
-        material: '面食',
-        author: '烧贝壳',
-        navigator: "/pages/detailFood16/detailFood16?id=16",
-        save: 888,
-        like: 999
-      }
-    ],
+    isSearch: false,
+    noMore: false,
     isLoading: false,//正在加载中
     noMore: false//是否还有更多数据
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    if (!isSearch) {
+      wx.cloud.callFunction({
+        name: 'searchByType',
+        data: {
+          sort: '色味俱全鲜香主食',
+          page: 0
+        },
+        success: function (res) {
+          console.log(res)
+          searchGroup = res.result.data;
+          that.setData({
+            searchGroup
+          })
+        }
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+  onUnload: function (res) {
+    isSearch = false;
+  }
+  ,
   /**
    * 上拉加载更多
    */
   onReachBottom: function () {
-    if (!this.data.noMore) {
-      var that = this;
-      console.log('circle 下一页');
-      this.setData({
-        isLoading: true
+    var that = this;
+    if (isSearch && !noMore) {
+      page += 19;
+      wx.cloud.callFunction({
+        name: 'search',
+        data: {
+          name: name,
+          page: page
+        },
+        success: function (res) {
+          console.log(res)
+          if (res.result.data.length != 0) {
+            for (var i = 0; i < res.result.data.length; i++) {
+              searchGroup.push(res.result.data[i])
+            }
+            console.log(searchGroup)
+            that.setData({
+              isSearch, searchGroup
+            })
+          }
+          else if (res.result.data.length == 0) {
+            noMore = true;
+            that.setData({
+              noMore
+            })
+          }
+        }
+
       })
-      var timer = setTimeout(function () {
-        console.log(888);
-        that.setData({
-          isLoading: false
+    }
+    else {
+      if (!noMore) {
+        page += 19;
+        wx.cloud.callFunction({
+          name: 'searchByType',
+          data: {
+            sort: '色味俱全鲜香主食',
+            page: page
+          },
+          success: function (res) {
+            if (res.result.data.length != 0) {
+              for (var i = 0; i < res.result.data.length; i++) {
+                searchGroup.push(res.result.data[i])
+              }
+              console.log(searchGroup)
+              that.setData({
+                searchGroup
+              })
+            }
+            else if (res.result.data.length == 0) {
+              noMore = true;
+              that.setData({
+                noMore
+              })
+            }
+          }
         })
-        clearTimeout(timer);
-      }, 1000)
+      }
     }
 
-
-    //   wx.request({
-    //       url: '',
-    //       data: {},
-    //       method: 'GET',
-    //       // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-    //       // header: {}, // 设置请求的 header
-    //       success: function (res) {
-    //           // success
-    //       },
-    //       fail: function () {
-    //           // fail
-    //       },
-    //       complete: function () {
-    //           // complete
-    //           wx.hideNavigationBarLoading() //完成停止加载
-    //           wx.stopPullDownRefresh() //停止下拉刷新
-    //       }
-    //   })
+  },
+  search: function (event) {
+    var that = this;
+    page = 0;
+    isSearch = true;
+    searchGroup = [];
+    noMore = false;
+    this.setData({
+      noMore
+    })
+    console.log(event.detail.value);
+    name = event.detail.value;
+    if (name != "") {
+      wx.cloud.callFunction({
+        name: 'search',
+        data: {
+          name: name,
+          page: page
+        },
+        success: function (res) {
+          console.log(res)
+          if (res.result.data.length != 0) {
+            for (var i = 0; i < res.result.data.length; i++) {
+              if (res.result.data[i]['sort'] == '色味俱全鲜香主食')
+                searchGroup.push(res.result.data[i])
+            }
+            console.log(searchGroup)
+            that.setData({
+              isSearch, searchGroup
+            })
+          }
+        }
+      })
+    }
+  },
+  jumpDetial: function (event) {
+    var id = event.currentTarget.id;
+    console.log(id)
+    app.globalData.id = searchGroup[id]['_id']
+    console.log(app.globalData.id)
+    wx.navigateTo({
+      url: '/pages/detailFood/detailFood',
+    })
   }
 })

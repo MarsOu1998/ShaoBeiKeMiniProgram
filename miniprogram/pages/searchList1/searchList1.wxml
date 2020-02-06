@@ -7,13 +7,13 @@
   </view>
   <!-- 搜索列表 -->
   <view class="like-list" wx:if="{{!isSearch}}">
-   <view class="like-item" wx:for="{{searchListArr}}" data-id="{{item.id}}" url="{{item.navigator}}">
-        <image src="{{item.imgUrl}}"></image>
+   <view class="like-item" wx:for="{{searchGroup}}" id="{{index}}" bindtap="jumpDetial">
+        <image src="{{item.cover}}"></image>
         <view class="right-content">
-            <rich-text>{{item.title}}</rich-text>
+            <rich-text>{{item.name}}</rich-text>
             <view>{{item. material}}</view>
             <view>{{item.author}}</view>
-            <text>收藏{{item.save}}</text><text> 点赞{{item.like}}</text>
+            <text>收藏{{item.collectionNumber}}</text><text> 点赞{{item.like}}</text>
         </view>
     </view>
   </view>

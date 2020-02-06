@@ -14,6 +14,7 @@
 	"libVersion": "2.8.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -82,6 +83,20 @@
 					"id": -1,
 					"name": "食谱详情页面",
 					"pathName": "pages/detailFood/detailFood",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "闲情雅致下午茶",
+					"pathName": "pages/searchList2/searchList2",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "色味俱全鲜香主食",
+					"pathName": "pages/searchList3/searchList3",
 					"query": "",
 					"scene": null
 				}

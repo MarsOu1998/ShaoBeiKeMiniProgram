@@ -45,6 +45,7 @@ view.search{
 }
 /**今日推荐**/
 .todayNew{
+  margin-top: 30rpx;
   width:100%;
   position: relative;
   font-size: 13pt;

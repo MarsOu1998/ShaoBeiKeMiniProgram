@@ -1,6 +1,5 @@
-//index.js
-//获取应用实例
 var app = getApp()
+var show=[];
 Page({
   data: {
     motto: 'Hello World',
@@ -164,47 +163,44 @@ Page({
   scroll: function (e) {
       console.log(e)
   },
-  onReachBottom: function () {
-      if(!this.data.noMore){
-          var that = this;
-          console.log('circle 下一页');
-          this.setData({
-              isLoading: true
-          })
-          var timer = setTimeout(function () {
-              console.log(888);
-              that.setData({
-                  isLoading: false
-              })
-              clearTimeout(timer);
-          }, 1000)
-      }
- 
-      
-      
-    //   wx.request({
-    //       url: '',
-    //       data: {},
-    //       method: 'GET',
-    //       // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-    //       // header: {}, // 设置请求的 header
-    //       success: function (res) {
-    //           // success
-    //       },
-    //       fail: function () {
-    //           // fail
-    //       },
-    //       complete: function () {
-    //           // complete
-    //           wx.hideNavigationBarLoading() //完成停止加载
-    //           wx.stopPullDownRefresh() //停止下拉刷新
-    //       }
-    //   })
-  },
-//xyy: function () {
-   // wx.navigateTo({
-    //  url: '/pages/index2/index2'
-   // })
   
-  //}
+  onShow:function(res){
+    show = [];
+    var that = this;
+    wx.cloud.callFunction({
+      name:'foodCount',
+      data:{},
+      success:function(res){
+        var count=res.result.total;
+        wx.cloud.callFunction({
+          name: 'searchAll',
+          data: {
+            count:count
+          },
+          success: function (res) {
+            console.log(res);
+            for (var i = 0; i < res.result.data.length; i++) {
+              show.push(res.result.data[i])
+            }
+            show=show.reverse();
+            console.log(show)
+            that.setData({
+              show
+            })
+          }
+        })
+      }
+    })
+    
+    
+  },
+  jumpDetail: function (event) {
+    var id = event.currentTarget.id;
+    console.log(id)
+    app.globalData.id = show[id]['_id']
+    console.log(app.globalData.id)
+    wx.navigateTo({
+      url: '/pages/detailFood/detailFood',
+    })
+  }
 })

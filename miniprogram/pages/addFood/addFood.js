@@ -8,7 +8,7 @@ var inputBrief;//存放菜品简介
 var degreeType="简单";//存放烹饪难度;
 var timeType = "10分钟及以下";//存放烹饪时间
 var inputSkill;//存放小技巧
-var sortType;//存放菜品类型
+var sortType = '最受欢迎家常菜谱';//存放菜品类型
 var share
 var isClick;//若用户已上传封面图，则隐藏提示字样
 var isName=false;//用户是否已经输入菜品名称

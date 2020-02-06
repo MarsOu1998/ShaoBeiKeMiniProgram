@@ -1,22 +1,37 @@
-<!--pages/searchList2/searchList2.wxml-->
+<!--pages/searchList/searchList.wxml-->
 <view class="container">
 <!-- 搜索框 -->
   <view class="section">
-    <input class="search" placeholder-class="phcolor" placeholder="搜索从这里开始" confirm-type="send"/>
+    <input class="search" placeholder-class="phcolor" placeholder="搜索从这里开始" confirm-type="search" bindconfirm="search"/>
     <image src="../img/search.png"></image>
   </view>
   <!-- 搜索列表 -->
-  <view class="like-list" >
-   <navigator class="like-item" wx:for="{{searchListArr}}" data-id="{{item.id}}" url="{{item.navigator}}">
-        <image src="{{item.imgUrl}}"></image>
+  <view class="like-list" wx:if="{{!isSearch}}">
+   <view class="like-item" wx:for="{{searchGroup}}" id="{{index}}" bindtap="jumpDetial">
+        <image src="{{item.cover}}"></image>
         <view class="right-content">
-            <rich-text>{{item.title}}</rich-text>
+            <rich-text>{{item.name}}</rich-text>
             <view>{{item. material}}</view>
             <view>{{item.author}}</view>
-            <text>收藏{{item.save}}</text><text> 点赞{{item.like}}</text>
+            <text>收藏{{item.collectionNumber}}</text><text> 点赞{{item.like}}</text>
         </view>
-    </navigator>
+    </view>
   </view>
+
+
+  <view class="like-list" wx:if="{{isSearch}}">
+   <view class="like-item" wx:for="{{searchGroup}}" id="{{index}}" bindtap="jumpDetial">
+        <image src="{{item.cover}}"></image>
+        <view class="right-content">
+            <rich-text>{{item.name}}</rich-text>
+            <view>{{item. material}}</view>
+            <view>{{item.author}}</view>
+            <text>收藏{{item.collectionNumber}}</text><text> 点赞{{item.like}}</text>
+        </view>
+    </view>
+  </view>
+
+
   <!-- 上拉加载更多 -->
   <view hidden="{{noMore}}">
     <view class="loadMore" hidden="{{isLoading}}">上拉加载更多</view>

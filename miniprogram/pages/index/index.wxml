@@ -16,21 +16,16 @@
   </view>
   <!-- 今日推荐 -->
   <view class="todayNew">
-    <view class="todayTitle">
+    <view class="todayTitle" >
       今日推荐
     </view>
 
     <view class="todayList " >
-       <navigator class="todayItem " wx:for="{{todayListArr}}"url="{{item.navigator}}" hover-class="navigator-hover">
-            <image src="{{item.imgUrl}}"/>
-            <text>{{item.text}}</text>
-        </navigator>
+       <view class="todayItem " wx:for="{{show}}" bindtap="jumpDetail" id="{{index}}">
+            <image src="{{item.cover}}"/>
+            <text>{{item.name}}</text>
+        </view>
     </view>
   </view>
-  <!--<button type="primary" bindtap="xyy">下一页</button>-->
-  <view hidden="{{noMore}}">
-    <view class="loadMore" hidden="{{isLoading}}">上拉加载更多</view>
-    <view class="loadMore" hidden="{{!isLoading}}">加载中...</view>
-  </view>
-  <view class="loadMore" hidden="{{!noMore}}">没有更多数据</view>
+
 </view>
