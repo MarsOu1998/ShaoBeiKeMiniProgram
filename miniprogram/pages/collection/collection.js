@@ -21,14 +21,7 @@ Page({
           wx.showToast({
             title: '尚未登陆，请先登录',
             icon:'none',
-            success:function(res){
-              setTimeout(function(){
-                wx.switchTab({
-                  url: '/pages/user/user',
-                })
-              }
-                ,1000)
-            }
+            
           })
     }
     else{

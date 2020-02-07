@@ -5,7 +5,7 @@
     <image class="userinfo-avatar" src="/images/profile3.png" background-size="cover"></image>
     <view class="userinfo-text"> 
       <view class="userinfo-nickname" wx:if="{{isLogin}}">欢迎，{{userInfo.account}}
-       <view class="likeCount" bindtap="bindViewTap">点击上传我的菜谱</view>
+       <view class="likeCount" bindtap="upload">点击上传我的菜谱</view>
        </view>
       <text wx:else bindtap="login">请先登录</text>
     </view> 

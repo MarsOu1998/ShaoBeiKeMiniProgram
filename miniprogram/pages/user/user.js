@@ -120,10 +120,9 @@ Page({
       url: '/pages/myFood/myFood',
     })
   },
-  myfood:function(){
-    wx.navigateTo({
-      url: '/pages/myFood/myFood',
-    })
-  }
-
+upload:function(res){
+  wx.navigateTo({
+    url: '/pages/addFood/addFood',
+  })
+}
 })
