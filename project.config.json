@@ -113,6 +113,12 @@
 					"pathName": "pages/collection/collection",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分类",
+					"pathName": "pages/select/select",
+					"scene": null
 				}
 			]
 		}

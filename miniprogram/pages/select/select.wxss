@@ -24,8 +24,8 @@
   line-height: 70rpx;
   box-sizing: border-box;
   border-radius: 70rpx;
-  color:#7ac873;
-  border: 1px solid #7ac873;
+  color:#219916;
+  border: 1px solid #219916;
   display:inline-block;
 }
 

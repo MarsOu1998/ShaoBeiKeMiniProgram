@@ -1,4 +1,23 @@
-// pages/select/select.js
+var app=getApp();
+var meatGroup = ["1acf1de95e3b807c0af3b7b60b4dd442", "d68532785e3b94020afdc7ef3f930139", "d68532785e3ad6b30ace348a6b85997b", "74b140b45e3a9a3d0aaf5f076311e823", "da51bd8c5e3b93500afd86243f7a94d2", 
+  "d68532785e3adac10acfc0f262530f9a"
+]
+var vegetableGroup = ["da51bd8c5e3b751f0aed24b332ad2e45",
+  "da51bd8c5e3b82090af3d6466ceda7cc",
+  "0ec685215e3b81330af380ee6a2ba123",
+  "d9ea35c25e3ad95a0acf49e349b0da5e",
+  "74b140b45e3b76fc0aed22423195d526",
+  "da51bd8c5e3b77970aee56cd6af3c4e7"
+]
+var popularGroup=[
+  "1acf1de95e3b782b0aef63f866a1ea65"
+  , "da51bd8c5e3b797f0aef46c32728ed7a"
+  , "da51bd8c5e3b7e8c0af1e2332551c7d8"
+
+]
+var bakeGroup=[
+
+]
 Page({
 
   /**
@@ -8,7 +27,7 @@ Page({
     searchNameArr:
         {
             searchOne:[
-               
+                               
                 {
                     id: 1,
                     keywords: '最受欢迎家常菜谱'
@@ -26,7 +45,7 @@ Page({
                 {
                     id: 1,
                     keywords: '糖醋排骨',
-                    navigator: "/pages/detailFood2/detailFood2?id=2"
+              
                 },
                 {
                     id: 1,
@@ -142,59 +161,44 @@ Page({
    
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
+  meat:function(event){
+    console.log(event.currentTarget.id);
+    var id = event.currentTarget.id;
+    if(id<=meatGroup.length-1){
+      app.globalData.id=meatGroup[id]
+      wx.navigateTo({
+        url: '/pages/detailFood/detailFood',
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  vegetable: function (event) {
+    console.log(event.currentTarget.id);
+    var id = event.currentTarget.id;
+    if (id <= vegetableGroup.length - 1) {
+      app.globalData.id = vegetableGroup[id]
+      wx.navigateTo({
+        url: '/pages/detailFood/detailFood',
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  popular: function (event) {
+    console.log(event.currentTarget.id);
+    var id = event.currentTarget.id;
+    if (id <= popularGroup.length - 1) {
+      app.globalData.id = popularGroup[id]
+      wx.navigateTo({
+        url: '/pages/detailFood/detailFood',
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  bake: function (event) {
+    console.log(event.currentTarget.id);
+    var id = event.currentTarget.id;
+    if (id <= bakeGroup.length - 1) {
+      app.globalData.id = bakeGroup[id]
+      wx.navigateTo({
+        url: '/pages/detailFood/detailFood',
+      })
+    }
   }
 })
