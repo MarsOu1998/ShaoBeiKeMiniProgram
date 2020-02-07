@@ -2,6 +2,8 @@ var app=getApp()
 var food=[];
 var collection=[];
 var like=[];
+var collectionNumber;
+var likes;
 Page({
 
   /**
@@ -32,6 +34,10 @@ Page({
       },
       success:function(res){
         console.log(res);
+        likes=res.result.data[0]['like'];
+        collectionNumber=res.result.data[0]['collectionNumber']
+        console.log("当前点赞数为:"+likes);
+        console.log("当前收藏数为:"+collectionNumber)
         food=res.result.data[0]
         console.log(food)
         that.setData({
@@ -46,12 +52,15 @@ Page({
           success:function(res){
             console.log(res)
               collection=res.result.data[0]['collection'];
+            
+
             like = res.result.data[0]['like']
               console.log("collection:"+collection)
             console.log("like:" + like)
               var i=0,j=0;
               for(i=0;i<collection.length;i++){
                 if(app.globalData.id==collection[i]){
+                  
                   that.setData({
                     addSave: {
                       add: true,
@@ -59,6 +68,7 @@ Page({
                     }
                   }) 
                   break;
+                  
                 }
               }
               for(j=0;j<like.length;j++){
@@ -127,6 +137,19 @@ Page({
                 url: '../img/like01.png'
               }
             })
+            wx.cloud.callFunction({
+              name: 'updateFoodInfo',
+              data: {
+                _id: app.globalData.id,
+                like: (likes - 1)
+              },
+              success: function (res) {
+                console.log("点赞数-1")
+              },
+              fail: function (res) {
+                console.error(res)
+              }
+            })
           }
         })
       }
@@ -145,6 +168,19 @@ Page({
             addLike: {
               add: true,
               url: '../img/like02.png'
+            }
+          })
+          wx.cloud.callFunction({
+            name: 'updateFoodInfo',
+            data: {
+              _id: app.globalData.id,
+              like: (likes + 1)
+            },
+            success: function (res) {
+              console.log("点赞数+1")
+            },
+            fail:function(res){
+              console.error(res)
             }
           })
         }
@@ -190,6 +226,19 @@ Page({
                 url: '../img/save03.png'
               }
             })
+            wx.cloud.callFunction({
+              name: 'updateFoodInfo',
+              data: {
+                _id: app.globalData.id,
+                collectionNumber: (collectionNumber - 1)
+              },
+              success: function (res) {
+                console.log("收藏数-1")
+              },
+              fail: function (res) {
+                console.error(res)
+              }
+            })
           }
         })
           
@@ -208,6 +257,19 @@ Page({
               addSave: {
                 add: true,
                 url: '../img/save04.png'
+              }
+            })
+            wx.cloud.callFunction({
+              name: 'updateFoodInfo',
+              data: {
+                _id: app.globalData.id,
+                collectionNumber: (collectionNumber + 1)
+              },
+              success: function (res) {
+                console.log("收藏数+1")
+              },
+              fail: function (res) {
+                console.error(res)
               }
             })
           }

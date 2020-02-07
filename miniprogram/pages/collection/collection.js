@@ -27,7 +27,7 @@ Page({
                   url: '/pages/user/user',
                 })
               }
-                ,3000)
+                ,1000)
             }
           })
     }
