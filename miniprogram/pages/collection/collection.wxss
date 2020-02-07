@@ -10,3 +10,7 @@
   width:300rpx;
  
 }
+.loadMore{
+  display: flex;
+  justify-content: center;
+}

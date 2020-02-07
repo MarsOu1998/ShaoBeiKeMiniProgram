@@ -1,0 +1,24 @@
+<view wx:if="{{!empty}}">
+<view class="like-list" >
+    <view class="like-item" wx:for="{{food}}" id="{{index}}" bindtap="jumpDetail">
+            <image src="{{item.cover}}"></image>
+            <view class="right-content">
+                <rich-text>{{item.name}}</rich-text>
+                <view>{{item. material}}</view>
+                <view>{{item.author}}</view>
+                <text>收藏{{item.collectionNumber}}</text><text> 点赞{{item.like}}</text>
+            </view>
+        </view>
+    </view>
+  <!-- 上拉加载更多 -->
+  <view hidden="{{noMore}}">
+    <view class="loadMore" hidden="{{isLoading}}">上拉加载更多</view>
+    <view class="loadMore" hidden="{{!isLoading}}">加载中...</view>
+  </view>
+  <view class="loadMore" hidden="{{!noMore}}">没有更多数据</view>
+
+</view>
+
+<view wx:if="{{empty}}" class="empty">
+  <image src="/images/empty.png"></image>
+</view>
